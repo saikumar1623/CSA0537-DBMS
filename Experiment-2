@@ -1,0 +1,171 @@
+mysql> use student1;
+Database changed
+mysql> desc faculty;
++---------+----------+------+-----+---------+-------+
+| Field   | Type     | Null | Key | Default | Extra |
++---------+----------+------+-----+---------+-------+
+| facno   | int(10)  | YES  |     | NULL    |       |
+| name    | char(20) | YES  |     | NULL    |       |
+| gender  | char(10) | YES  |     | NULL    |       |
+| mobilno | int(10)  | YES  |     | NULL    |       |
+| DOJ     | int(10)  | YES  |     | NULL    |       |
+| dept    | char(10) | YES  |     | NULL    |       |
++---------+----------+------+-----+---------+-------+
+6 rows in set (0.02 sec)
+
+mysql> alter table faculty add primary key(facno);
+Query OK, 0 rows affected (0.00 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc faculty;
++---------+----------+------+-----+---------+-------+
+| Field   | Type     | Null | Key | Default | Extra |
++---------+----------+------+-----+---------+-------+
+| facno   | int(10)  | NO   | PRI | 0       |       |
+| name    | char(20) | YES  |     | NULL    |       |
+| gender  | char(10) | YES  |     | NULL    |       |
+| mobilno | int(10)  | YES  |     | NULL    |       |
+| DOJ     | int(10)  | YES  |     | NULL    |       |
+| dept    | char(10) | YES  |     | NULL    |       |
++---------+----------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> desc department;
++----------+----------+------+-----+---------+-------+
+| Field    | Type     | Null | Key | Default | Extra |
++----------+----------+------+-----+---------+-------+
+| deptno   | int(10)  | YES  |     | NULL    |       |
+| deptname | char(20) | YES  |     | NULL    |       |
+| depthead | char(10) | YES  |     | NULL    |       |
++----------+----------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+mysql> alter table department add primary key(deptno);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc department;
++----------+----------+------+-----+---------+-------+
+| Field    | Type     | Null | Key | Default | Extra |
++----------+----------+------+-----+---------+-------+
+| deptno   | int(10)  | NO   | PRI | 0       |       |
+| deptname | char(20) | YES  |     | NULL    |       |
+| depthead | char(10) | YES  |     | NULL    |       |
++----------+----------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table student1 rename column student1 to student;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column student1 to student' at line 1
+mysql> desc course;
++----------+---------+------+-----+---------+-------+
+| Field    | Type    | Null | Key | Default | Extra |
++----------+---------+------+-----+---------+-------+
+| courseno | int(10) | YES  |     | NULL    |       |
+| hallno   | int(10) | YES  |     | NULL    |       |
+| facno    | int(10) | YES  |     | NULL    |       |
++----------+---------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table student1 rename to student;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> show tables;
++--------------------+
+| Tables_in_student1 |
++--------------------+
+| course             |
+| department         |
+| faculty            |
+| school             |
+| student            |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> alter table course add primary key(courseno);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc course;
++----------+---------+------+-----+---------+-------+
+| Field    | Type    | Null | Key | Default | Extra |
++----------+---------+------+-----+---------+-------+
+| courseno | int(10) | NO   | PRI | 0       |       |
+| hallno   | int(10) | YES  |     | NULL    |       |
+| facno    | int(10) | YES  |     | NULL    |       |
++----------+---------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+mysql> desc student;
++---------+----------+------+-----+---------+-------+
+| Field   | Type     | Null | Key | Default | Extra |
++---------+----------+------+-----+---------+-------+
+| regno   | int(10)  | YES  |     | NULL    |       |
+| name    | char(20) | YES  |     | NULL    |       |
+| gender  | char(10) | YES  |     | NULL    |       |
+| DOB     | int(10)  | YES  |     | NULL    |       |
+| mobilno | int(10)  | YES  |     | NULL    |       |
+| city    | char(20) | YES  |     | NULL    |       |
++---------+----------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> alter table student add primary key(regno);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++---------+----------+------+-----+---------+-------+
+| Field   | Type     | Null | Key | Default | Extra |
++---------+----------+------+-----+---------+-------+
+| regno   | int(10)  | NO   | PRI | 0       |       |
+| name    | char(20) | YES  |     | NULL    |       |
+| gender  | char(10) | YES  |     | NULL    |       |
+| DOB     | int(10)  | YES  |     | NULL    |       |
+| mobilno | int(10)  | YES  |     | NULL    |       |
+| city    | char(20) | YES  |     | NULL    |       |
++---------+----------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> alter table faculty add check(gender='M' OR 'F');
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc faculty;
++---------+----------+------+-----+---------+-------+
+| Field   | Type     | Null | Key | Default | Extra |
++---------+----------+------+-----+---------+-------+
+| facno   | int(10)  | NO   | PRI | 0       |       |
+| name    | char(20) | YES  |     | NULL    |       |
+| gender  | char(10) | YES  |     | NULL    |       |
+| mobilno | int(10)  | YES  |     | NULL    |       |
+| DOJ     | int(10)  | YES  |     | NULL    |       |
+| dept    | char(10) | YES  |     | NULL    |       |
++---------+----------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| student1           |
+| student2           |
+| student_1          |
+| test               |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> use student1;
+Database changed
+mysql> show tables;
++--------------------+
+| Tables_in_student1 |
++--------------------+
+| course             |
+| department         |
+| faculty            |
+| school             |
+| student            |
++--------------------+
+5 rows in set (0.00 sec)
